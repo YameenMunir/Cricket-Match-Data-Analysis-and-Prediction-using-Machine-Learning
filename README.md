@@ -1,5 +1,7 @@
 # Cricket Match Data Analysis and Prediction Using Machine Learning
 
+[**Link to Application**](https://cricket-match-data-analysis-and-prediction-using-machine-learn.streamlit.app/)
+
 ## Introduction
 Cricket is a sport influenced by multiple factors such as player performance, match conditions, and game dynamics. This project aims to analyze cricket match data and develop machine learning models to predict various aspects of the game, including match outcomes, player performance, runs per over, and wicket probabilities. By leveraging data-driven approaches, this project provides valuable insights and enhances predictive accuracy in cricket analytics.
 
