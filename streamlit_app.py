@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
 
-st.title("Cricket Match Data Analysis and Prediction")
+st.title("Cricket Match Data Analysis and Prediction Using Machine Learning")
 
 st.header("Introduction")
 st.write("""
