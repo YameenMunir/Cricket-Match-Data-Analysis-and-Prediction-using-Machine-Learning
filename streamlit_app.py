@@ -199,11 +199,14 @@ Overall, the data suggests that scoring runs in cricket is a challenging task, w
 
 st.markdown('---')
 st.markdown(
-    '<div style="text-align:center; font-size:1.1em;">'
-    '    Made by <b>Yameen Munir</b> &nbsp;|&nbsp; '
-    '    <a href="https://github.com/YameenMunir" target="_blank">GitHub</a> &nbsp;|&nbsp; '
-    '    <a href="https://www.linkedin.com/in/yameen-munir/" target="_blank">LinkedIn</a> &nbsp;|&nbsp; '
-    '    <a href="https://www.datascienceportfol.io/YameenMunir" target="_blank">Portfolio</a>'
+    '<div style="text-align:center; font-size:1.1em; padding: 20px;">'
+    '    Made with ❤️ by <b>Yameen Munir</b><br><br>'
+    '    <a href="https://github.com/YameenMunir" target="_blank" style="text-decoration:none; margin:0 10px;">'
+    '        🐙 GitHub</a> &nbsp;|&nbsp; '
+    '    <a href="https://www.linkedin.com/in/yameen-munir/" target="_blank" style="text-decoration:none; margin:0 10px;">'
+    '        💼 LinkedIn</a> &nbsp;|&nbsp; '
+    '    <a href="https://yameenmunir.vercel.app/" target="_blank" style="text-decoration:none; margin:0 10px;">'
+    '        🌐 Website</a>'
     '</div>',
     unsafe_allow_html=True
 )
