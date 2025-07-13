@@ -8,15 +8,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
 
-st.title("Cricket Match Data Analysis and Prediction Using Machine Learning")
+st.title("🏏 Cricket Match Data Analysis and Prediction Using Machine Learning")
 
-st.header("Introduction")
+st.header("📖 Introduction")
 st.write("""
 Cricket is a sport which consists of factors such as influencing match outcomes, player performance, and game dynamics. This project aims to analyze cricket match data and develop some machine learning models to predict various aspects of the game, including match outcomes, player performance, runs scored per over, and the likelihood of wickets falling. By leveraging data-driven approaches, I aim to provide valuable insights and improve predictive accuracy in cricket analytics.
 """)
 
 # Data Preprocessing
-st.header("Data Preprocessing")
+st.header("🔧 Data Preprocessing")
 @st.cache_data(show_spinner=False)
 def load_data():
     data1 = pd.read_csv('deliveries.csv')
@@ -25,10 +25,10 @@ def load_data():
 
 data1, data2 = load_data()
 
-st.subheader("First 5 rows of deliveries data")
+st.subheader("📊 First 5 rows of deliveries data")
 st.dataframe(data1.head())
 
-st.subheader("Last 5 rows of deliveries data")
+st.subheader("📈 Last 5 rows of deliveries data")
 st.dataframe(data1.tail())
 
 # Data Cleaning (as in notebook)
@@ -45,11 +45,11 @@ columns_to_drop = [
     'wicket_type', 'player_dismissed', 'other_wicket_type', 'other_player_dismissed'
 ]
 data1 = data1.drop(columns=[col for col in columns_to_drop if col in data1.columns])
-st.subheader("Null values in deliveries data")
+st.subheader("🔍 Null values in deliveries data")
 st.write(data1.isnull().sum())
 
 # Data Visualization (as in notebook)
-st.header("Data Visualization")
+st.header("📈 Data Visualization")
 
 viz_options = [
     "Runs Distribution",
@@ -61,7 +61,7 @@ viz_options = [
 viz_choice = st.selectbox("Select a visualization to display:", viz_options)
 
 if viz_choice == "Runs Distribution":
-    st.subheader("1. Runs Distribution")
+    st.subheader("📊 1. Runs Distribution")
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.histplot(data1['batsman_runs'], bins=30, kde=True, ax=ax)
     ax.set_title('Distribution of Runs Scored')
@@ -69,7 +69,7 @@ if viz_choice == "Runs Distribution":
     ax.set_ylabel('Frequency')
     st.pyplot(fig)
 elif viz_choice == "Team Performance":
-    st.subheader("2. Team Performance")
+    st.subheader("🏆 2. Team Performance")
     if 'batting_team' in data1.columns:
         team_performance = data1.groupby('batting_team')['batsman_runs'].sum().reset_index()
         fig, ax = plt.subplots(figsize=(12, 8))
@@ -79,7 +79,7 @@ elif viz_choice == "Team Performance":
         ax.set_ylabel('Team')
         st.pyplot(fig)
 elif viz_choice == "Player Performance (Top 10 Batsmen)":
-    st.subheader("3. Player Performance (Top 10 Batsmen)")
+    st.subheader("🏏 3. Player Performance (Top 10 Batsmen)")
     if 'batsman' in data1.columns:
         player_performance = data1.groupby('batsman')['batsman_runs'].sum().reset_index()
         top_batsmen = player_performance.sort_values(by='batsman_runs', ascending=False).head(10)
@@ -90,7 +90,7 @@ elif viz_choice == "Player Performance (Top 10 Batsmen)":
         ax.set_ylabel('Player')
         st.pyplot(fig)
 elif viz_choice == "Total Runs Scored at Top 10 Venues":
-    st.subheader("4. Total Runs Scored at Top 10 Venues")
+    st.subheader("🏟️ 4. Total Runs Scored at Top 10 Venues")
     # Merge deliveries and matches to get venue info
     if 'match_id' in data1.columns and 'id' in data2.columns and 'venue' in data2.columns:
         merged = pd.merge(data1, data2[['id', 'venue']], left_on='match_id', right_on='id', how='left')
@@ -108,7 +108,7 @@ elif viz_choice == "Total Runs Scored at Top 10 Venues":
     else:
         st.warning("Could not merge deliveries and matches to get venue information.")
 elif viz_choice == "Winner Counts by Country (Top 10)":
-    st.subheader("Winner Counts by Country (Top 10)")
+    st.subheader("🥇 Winner Counts by Country (Top 10)")
     if 'winner' in data2.columns:
         winner_counts = data2['winner'].value_counts().head(10)
         fig, ax = plt.subplots(figsize=(21, 8))
@@ -120,7 +120,7 @@ elif viz_choice == "Winner Counts by Country (Top 10)":
         st.pyplot(fig)
 
 # Machine Learning Model (simple version, as in notebook)
-st.header("Machine Learning Prediction Model")
+st.header("🤖 Machine Learning Prediction Model")
 st.write("""
 A logistic regression model is used to predict match outcomes based on features such as batsman_runs and day_of_week. The model is trained and saved as 'cricket_match_predictor.joblib'.
 """)
@@ -143,7 +143,7 @@ def train_simple_model(data1, data2):
     model.fit(X_scaled, y)
     return model, scaler
 
-st.header("Train Logistic Regression Model (Simple Features)")
+st.header("🎯 Train Logistic Regression Model (Simple Features)")
 st.write("""
 This will train a new model using only 'batsman_runs' and 'day_of_week' as features, so the prediction UI will work correctly.
 """)
@@ -157,8 +157,8 @@ if st.button("Train Simple Model"):
         st.error(f"Simple model training failed: {model_error}")
 
 # Prediction Section
-st.header("Prediction Section")
-st.subheader("Predict Match Outcome")
+st.header("🔮 Prediction Section")
+st.subheader("🎲 Predict Match Outcome")
 
 # Remove duplicate data loading
 if 'match_id' in data1.columns and 'id' in data2.columns:
@@ -182,7 +182,7 @@ except Exception as e:
     st.warning(f"Model not found or error in prediction: {e}")
 
 # Add notebook-style insights as markdown
-st.header("Insights")
+st.header("💡 Insights")
 st.markdown("""
 - The target variable has two possible: 0 and 1, likely representing different outcomes of cricket match (in this case win or loss).
 - It is clear that there is imbalance with the distribution, with approximately 80% of the data points having a target value of 0.
@@ -192,7 +192,7 @@ st.markdown("""
 - Overall, the data suggests that scoring runs in cricket is a challenging task, with a high probability of scoring few runs on any given delivery. However, the occasional 4 or 6 can be a game changer in increasing the chances of a particular team from winning (depending on the consistency at which 4s and 6s are scored throughout overs).
 """)
 
-st.header("Conclusion")
+st.header("📝 Conclusion")
 st.write("""
 Overall, the data suggests that scoring runs in cricket is a challenging task, with a high probability of scoring few runs on any given delivery. However, the occasional 4 or 6 can be a game changer in increasing the chances of a particular team from winning (depending on the consistency at which 4s and 6s are scored throughout overs).
 """)
@@ -200,7 +200,7 @@ Overall, the data suggests that scoring runs in cricket is a challenging task, w
 st.markdown('---')
 st.markdown(
     '<div style="text-align:center; font-size:1.1em; padding: 20px;">'
-    '    Made with ❤️ by <b>Yameen Munir</b><br><br>'
+    '    Made By <b>👨‍💻 Yameen Munir</b><br><br>'
     '    <a href="https://github.com/YameenMunir" target="_blank" style="text-decoration:none; margin:0 10px;">'
     '        🐙 GitHub</a> &nbsp;|&nbsp; '
     '    <a href="https://www.linkedin.com/in/yameen-munir/" target="_blank" style="text-decoration:none; margin:0 10px;">'
